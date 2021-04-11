@@ -3,6 +3,7 @@ PImage background;
 //Sprite variables
 PImage spritePlayer;
 PImage spriteBranch;
+PImage spriteLives;
 //Menu and game variables
 int screenState;
 //Position Variables
@@ -31,9 +32,11 @@ void setup(){
     drops[i] = new Drop();
   }
   //Sprite loading
+  spriteLives = loadImage("images/Sprites/livesFull.png");
   spritePlayer = loadImage("images/Sprites/front-bat-sprite.png");
   //Sprite resize
   spritePlayer.resize(110, 80);
+  spriteLives.resize(50, 50);
   imageMode(CENTER);
 }
 
@@ -49,7 +52,16 @@ void draw(){
   if(alive == false){
     exit();
   }
-  if(alive == false || punts == 5000){
+  
+  if(punts == 5000){
+    text("Has acabat!", 300, 300);
+    textSize(500);
+    exit();
+  }
+  
+  if(alive == false){
+    text("Has perdut!", 300, 300);
+    textSize(500);
     exit();
   }
 }
@@ -71,6 +83,7 @@ void drawGame(){
   }
   
   image(spritePlayer, playerX, playerY);
+  image(spriteLives, 995, 30);
   for(int i = 0; i < drops.length; i++){
     drops[i].fall();
     drops[i].show();

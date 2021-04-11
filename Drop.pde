@@ -6,8 +6,17 @@ class Drop{
   float len = map(z, 0, 20, 7, 15);
   
   void fall(){
-    y = y + yspeed;
-    yspeed = yspeed + 0.05;
+    
+    if(punts <= 1000){
+      y = y + yspeed;
+      yspeed = yspeed + 0.50;
+    }else if(punts >= 1000){
+      y = y + yspeed;
+      yspeed = yspeed + 2.50;
+    }else if(punts >= 3000){
+      y = y + yspeed;
+    yspeed = yspeed + 3.00;
+    }
     
     if(y > height){
       y = random(-200, -100);
@@ -31,6 +40,8 @@ class Drop{
     float d = sqrt(sq(dx)+sq(dy)); // distància entre els objectes
 
     if (d < spritePlayer.width/4+spritePlayer.width/4) {
+      spriteLives = loadImage("images/Sprites/noLive.png");
+      spriteLives.resize(50, 50);
       alive = false;
     }
   }
